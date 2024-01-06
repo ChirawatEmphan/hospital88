@@ -1,28 +1,17 @@
-const express = require('express');
-const cors = require('cors');
-const connection = require('./db');
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import './index.css';
+import App from './App';
+import reportWebVitals from './reportWebVitals';
 
-const app = express();
-const PORT = 5000;
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+);
 
-app.use(cors());
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-app.get('/',(req,res) => {
-    res.send('Backend site.');
-});
-
-app.use('/api/patient', require('./src/routes/patient'));
-
-connection
-    .query("SELECT 1 AS result")
-    .then(result => {
-        console.log('Connent DB');
-        app.listen(PORT,() => console.log('Backend site running on port:' +PORT));
-
-    })
-    .catch(error => {
-        console.log('Can not to db');
-        console.log(error.message);
-    })
+// If you want to start measuring performance in your app, pass a function
+// to log results (for example: reportWebVitals(console.log))
+// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
+reportWebVitals();
